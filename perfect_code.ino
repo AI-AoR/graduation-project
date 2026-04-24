@@ -4,7 +4,6 @@
  * 蓝牙：软串口(D8/D10)
  * 舵机：D9，蜂鸣器：D13
  * 键盘：行 A0~A3，列 D2~D5（实际接线列顺序为 D5,D4,D3,D2）
- * 
  * 上传前必须断开指纹模块VCC，上传后接回
  * 调试信息通过蓝牙发送至手机，无需打开串口监视器
  */
@@ -17,11 +16,11 @@
 const int SERVO_PIN = 9;
 const int BUZZER_PIN = 13;
 
-// 键盘：行接 A0~A3，列接 D2~D5（但实际顺序反了，所以列引脚数组反过来）
+// 键盘：行接 A0~A3，列接 D2~D5
 const byte ROWS = 4;
 const byte COLS = 4;
 byte rowPins[ROWS] = {14, 15, 16, 17};      // A0, A1, A2, A3
-byte colPins[COLS] = {5, 4, 3, 2};          // 因为列线接反了，所以顺序反过来
+byte colPins[COLS] = {5, 4, 3, 2};          // 
 
 char keys[ROWS][COLS] = {
   {'1','2','3','A'},
@@ -217,7 +216,7 @@ void checkBluetooth() {
 // ==================== 指纹初始化 ====================
 void initFingerprint() {
   debugPrintln(F("正在初始化指纹模块..."));
-  finger.begin(57600);  // 若失败改为9600
+  finger.begin(57600);  
   if (finger.verifyPassword()) {
     debugPrintln(F("✅ 指纹模块连接成功"));
     finger.getTemplateCount();
